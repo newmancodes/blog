@@ -71,6 +71,6 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           draft: false
           prerelease: false
-          automatic_release_tag: "1.0.${{ github.run_number }}.${{ github.run_attempt }}"
+          automatic_release_tag: "v1.0.${{ github.run_number }}.${{ github.run_attempt }}"
           files: |
             ./blog-site.zip
