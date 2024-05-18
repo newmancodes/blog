@@ -1,0 +1,28 @@
+name: Deploy Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy-release:
+    runs-on: ubuntu-latest
+    environment: prod
+
+    permissions:
+      contents: read
+      id-token: write
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Authenticate with Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.ENTRA_APPLICATION_ID }}
+          tenant-id: ${{ secrets.ENTRA_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      
