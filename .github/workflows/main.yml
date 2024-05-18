@@ -1,9 +1,5 @@
 name: Build and Prepare Release
 
-permissions:
-  contents: read
-  id-token: write
-
 on:
   push:
     branches:
@@ -54,6 +50,10 @@ jobs:
     environment: prod
     needs: build
     if: ${{ github.event_name == 'push' }}
+
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
       - name: Checkout Repository
