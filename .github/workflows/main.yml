@@ -64,7 +64,7 @@ jobs:
           path: .
       
       - name: Authenticate with Azure
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
           client-id: ${{ secrets.ENTRA_APPLICATION_ID }}
           tenant-id: ${{ secrets.ENTRA_TENANT_ID }}
