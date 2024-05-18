@@ -27,8 +27,8 @@ jobs:
       
       - name: Lint Bicep Files
         run: |
-          az bicep lint ./deploy/00.sub.resourceGroup.bicep
-          az bicep lint ./deploy/01.group.staticWebSite.bicep
+          az bicep lint --file ./deploy/00.sub.resourceGroup.bicep
+          az bicep lint --file ./deploy/01.group.staticWebSite.bicep
       
       - name: Publish the Site
         run: |
