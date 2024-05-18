@@ -27,7 +27,7 @@ jobs:
       
       - name: Publish the Site
         run: |
-          hugo
+          hugo --minify
       
       - name: Package Public Site as Archive File
         run: |
