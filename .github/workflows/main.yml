@@ -50,6 +50,9 @@ jobs:
     needs: build
     if: ${{ github.event_name == 'push' }}
 
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
