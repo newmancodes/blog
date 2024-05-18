@@ -47,6 +47,7 @@ jobs:
 
   prepare-release:
     runs-on: ubuntu-latest
+    environment: prod
     needs: build
     if: ${{ github.event_name == 'push' }}
 
@@ -57,7 +58,7 @@ jobs:
           fetch-depth: 1
 
       - name: Retrieve Archive
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v4g
         with:
           name: blog-site
           path: .
