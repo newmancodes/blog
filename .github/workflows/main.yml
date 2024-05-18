@@ -25,6 +25,11 @@ jobs:
           hugo-version: '0.126.1'
           extended: true
       
+      - name: Lint Bicep Files
+        run: |
+          az bicep lint ./deploy/00.sub.resourceGroup.bicep
+          az bicep lint ./deploy/01.group.staticWebSite.bicep
+      
       - name: Publish the Site
         run: |
           hugo --minify
@@ -46,6 +51,20 @@ jobs:
     if: ${{ github.event_name == 'push' }}
 
     steps:
-      - name: Greet the World!
-        run: |
-          echo "Hello World!"
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Retrieve Archive
+        uses: actions/download-artifact@v2
+        with:
+          name: blog-site
+          path: .
+      
+      - name: Authenticate with Azure
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.ENTRA_APPLICATION_ID }}
+          tenant-id: ${{ secrets.ENTRA_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
