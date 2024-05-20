@@ -102,8 +102,8 @@ jobs:
               generate_release_notes: true
             })
 
-            echo 'upload_url=' + response.upload_url >> '$GITHUB_OUTPUT'
-            echo 'release_id=' + response.id >> '$GITHUB_OUTPUT'
+            //echo 'upload_url=' + response.upload_url >> '$GITHUB_OUTPUT'
+            //echo 'release_id=' + response.id >> '$GITHUB_OUTPUT'
 
       - name: Upload Release Assets
         uses: actions/upload-release-asset@v1
