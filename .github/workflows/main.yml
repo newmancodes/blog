@@ -111,10 +111,13 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            const fs = require('fs');
+            
             github.rest.repos.uploadReleaseAsset({
               owner: context.repo.owner,
               repo: context.repo.repo,
               release_id: ${{ steps.create_release.outputs.release_id}},
+              headers: { 'content-type': 'application/zip' },
               name: 'blog-site.zip',
               data: fs.readFileSync('./blog-site.zip')
             })
