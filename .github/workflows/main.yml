@@ -102,6 +102,8 @@ jobs:
               generate_release_notes: true
             })
 
+            core.setOutput('upload_url', response.upload_url)
+            core.setOutput('release_id', response.id)
             //echo 'upload_url=' + response.upload_url >> '$GITHUB_OUTPUT'
             //echo 'release_id=' + response.id >> '$GITHUB_OUTPUT'
 
