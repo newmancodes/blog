@@ -90,12 +90,20 @@ jobs:
       
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/github-script@v7
         with:
-          tag_name: ${{ env.BUILD_VERSION }}
-          release_name: ${{ env.BUILD_VERSION }}
+          script: |
+            const response = github.rest.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: '${{ env.BUILD_VERSION }}',
+              name: '${{ env.BUILD_VERSION }}',
+              draft: true,
+              generate_release_notes: true
+            })
+
+            echo 'upload_url=' + response.upload_url >> '$GITHUB_OUTPUT'
+            echo 'release_id=' + response.id >> '$GITHUB_OUTPUT'
 
       - name: Upload Release Assets
         uses: actions/upload-release-asset@v1
